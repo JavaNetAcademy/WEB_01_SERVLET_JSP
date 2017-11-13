@@ -50,11 +50,12 @@ public class HeroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        service.add(new Hero(
+        Hero tmp =new Hero(
                 request.getParameter("name"), 
                 request.getParameter("description"), 
-                request.getParameter("active")!=null)
-        );
+                request.getParameter("active")!=null);
+        request.getSession().setAttribute("hero", tmp);
+        service.add(tmp);
         doGet(request, response);
     }
 
